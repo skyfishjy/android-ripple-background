@@ -129,8 +129,8 @@ public class RippleBackground extends RelativeLayout{
         }
     }
 
-    public void startAnimation(){
-        if(!isAnimationRunning()){
+    public void startRippleAnimation(){
+        if(!isRippleAnimationRunning()){
             for(RippleView rippleView:rippleViewList){
                 rippleView.setVisibility(VISIBLE);
             }
@@ -139,14 +139,14 @@ public class RippleBackground extends RelativeLayout{
         }
     }
 
-    public void stopAnimation(){
-        if(isAnimationRunning()){
+    public void stopRippleAnimation(){
+        if(isRippleAnimationRunning()){
             animatorSet.end();
             animationRunning=false;
         }
     }
 
-    public boolean isAnimationRunning(){
+    public boolean isRippleAnimationRunning(){
         return animationRunning;
     }
 }

@@ -33,8 +33,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rippleBackground.startAnimation();
-
+                rippleBackground.startRippleAnimation();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

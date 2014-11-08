@@ -10,8 +10,11 @@ A beautiful ripple animation for your app. You can easily change its color, spee
 
 ####Install with Gradle
 
-//TODO push to maven center
-
+```groovy
+dependencies {
+        compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+}
+```
 ###Step 2
 ####RippleBackground
 
@@ -36,6 +39,23 @@ Add `RippleBackground` to your layout with content you want, like an ImageView. 
         android:id="@+id/centerImage"
         android:src="@drawable/demoImage"/>
 </com.skyfishjy.library.RippleBackground>
+```
+Start animation:
+
+```java
+    final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
+    ImageView imageView=(ImageView)findViewById(R.id.centerImage);
+    imageView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            rippleBackground.startRippleAnimation();
+        }
+    });
+```
+Stop animation:
+
+```java
+    rippleBackground.stopRippleAnimation();
 ```
 
 ##Theming
