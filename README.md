@@ -66,3 +66,5 @@ Stop animation:
 * app:rb_scale [interger def:6] --> Scale of ripple at the end of one animation cycle
 * app:rb_type [enum (fillRipple, strokeRipple) def:fillRipple] --> Filled circle or ring
 * app:rb_strokeWidth [dimension def:2dp] --> Stroke width of the ripple, ONLY work when rb_type="strokeRipple"
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--ripple--background-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1107)
