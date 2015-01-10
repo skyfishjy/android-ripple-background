@@ -87,7 +87,6 @@ public class RippleBackground extends RelativeLayout{
         rippleParams.addRule(CENTER_IN_PARENT, TRUE);
 
         animatorSet = new AnimatorSet();
-        animatorSet.setDuration(rippleDurationTime);
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorList=new ArrayList<Animator>();
 
@@ -95,20 +94,23 @@ public class RippleBackground extends RelativeLayout{
             RippleView rippleView=new RippleView(getContext());
             addView(rippleView,rippleParams);
             rippleViewList.add(rippleView);
-            final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", 1.0f, rippleScale);
+             final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", 1.0f, rippleScale);
             scaleXAnimator.setRepeatCount(ObjectAnimator.INFINITE);
             scaleXAnimator.setRepeatMode(ObjectAnimator.RESTART);
-            scaleXAnimator.setStartDelay(i*rippleDelay);
+            scaleXAnimator.setStartDelay(i * rippleDelay);
+            scaleXAnimator.setDuration(rippleDurationTime);
             animatorList.add(scaleXAnimator);
             final ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleY", 1.0f, rippleScale);
             scaleYAnimator.setRepeatCount(ObjectAnimator.INFINITE);
             scaleYAnimator.setRepeatMode(ObjectAnimator.RESTART);
-            scaleYAnimator.setStartDelay(i*rippleDelay);
+            scaleYAnimator.setStartDelay(i * rippleDelay);
+            scaleYAnimator.setDuration(rippleDurationTime);
             animatorList.add(scaleYAnimator);
-            final ObjectAnimator alphaAnimator= ObjectAnimator.ofFloat(rippleView, "Alpha", 1.0f, 0f);
+            final ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(rippleView, "Alpha", 1.0f, 0f);
             alphaAnimator.setRepeatCount(ObjectAnimator.INFINITE);
             alphaAnimator.setRepeatMode(ObjectAnimator.RESTART);
             alphaAnimator.setStartDelay(i * rippleDelay);
+            alphaAnimator.setDuration(rippleDurationTime);
             animatorList.add(alphaAnimator);
         }
 
