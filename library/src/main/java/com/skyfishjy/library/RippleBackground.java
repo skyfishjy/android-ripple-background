@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
-
 import java.util.ArrayList;
 
 /**
@@ -24,6 +23,7 @@ public class RippleBackground extends RelativeLayout{
     private static final int DEFAULT_DURATION_TIME=3000;
     private static final float DEFAULT_SCALE=6.0f;
     private static final int DEFAULT_FILL_TYPE=0;
+    private static final int OUTWARD_DIRECTION=1; 
 
     private int rippleColor;
     private float rippleStrokeWidth;
@@ -33,6 +33,7 @@ public class RippleBackground extends RelativeLayout{
     private int rippleDelay;
     private float rippleScale;
     private int rippleType;
+    private boolean rippleOutwards;
     private Paint paint;
     private boolean animationRunning=false;
     private AnimatorSet animatorSet;
@@ -40,6 +41,7 @@ public class RippleBackground extends RelativeLayout{
     private LayoutParams rippleParams;
     private ArrayList<RippleView> rippleViewList=new ArrayList<RippleView>();
 
+    
     public RippleBackground(Context context) {
         super(context);
     }
@@ -61,7 +63,6 @@ public class RippleBackground extends RelativeLayout{
         if (null == attrs) {
             throw new IllegalArgumentException("Attributes should be provided to this view,");
         }
-
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RippleBackground);
         rippleColor=typedArray.getColor(R.styleable.RippleBackground_rb_color, getResources().getColor(R.color.rippelColor));
         rippleStrokeWidth=typedArray.getDimension(R.styleable.RippleBackground_rb_strokeWidth, getResources().getDimension(R.dimen.rippleStrokeWidth));
@@ -70,6 +71,8 @@ public class RippleBackground extends RelativeLayout{
         rippleAmount=typedArray.getInt(R.styleable.RippleBackground_rb_rippleAmount,DEFAULT_RIPPLE_COUNT);
         rippleScale=typedArray.getFloat(R.styleable.RippleBackground_rb_scale,DEFAULT_SCALE);
         rippleType=typedArray.getInt(R.styleable.RippleBackground_rb_type,DEFAULT_FILL_TYPE);
+        rippleOutwards = typedArray.getInt(R.styleable.RippleBackground_rb_direction, OUTWARD_DIRECTION) == 1;
+        
         typedArray.recycle();
 
         rippleDelay=rippleDurationTime/rippleAmount;
@@ -95,17 +98,36 @@ public class RippleBackground extends RelativeLayout{
             RippleView rippleView=new RippleView(getContext());
             addView(rippleView,rippleParams);
             rippleViewList.add(rippleView);
-            final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", 1.0f, rippleScale);
+            
+            final ObjectAnimator scaleXAnimator;
+            if(rippleOutwards){
+            	scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", 1.0f, rippleScale);
+            }else{
+            	scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", rippleScale, 1.0f);
+            }
             scaleXAnimator.setRepeatCount(ObjectAnimator.INFINITE);
             scaleXAnimator.setRepeatMode(ObjectAnimator.RESTART);
             scaleXAnimator.setStartDelay(i*rippleDelay);
             animatorList.add(scaleXAnimator);
-            final ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleY", 1.0f, rippleScale);
+            
+            final ObjectAnimator scaleYAnimator;
+            if(rippleOutwards){
+            	scaleYAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleY", 1.0f, rippleScale);
+            }else{
+            	scaleYAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleY", rippleScale, 1.0f);
+            }
             scaleYAnimator.setRepeatCount(ObjectAnimator.INFINITE);
             scaleYAnimator.setRepeatMode(ObjectAnimator.RESTART);
             scaleYAnimator.setStartDelay(i*rippleDelay);
             animatorList.add(scaleYAnimator);
-            final ObjectAnimator alphaAnimator= ObjectAnimator.ofFloat(rippleView, "Alpha", 1.0f, 0f);
+            
+            
+            final ObjectAnimator alphaAnimator;
+            if(rippleOutwards){
+            	alphaAnimator= ObjectAnimator.ofFloat(rippleView, "Alpha", 1.0f, 0f);
+            }else{
+            	alphaAnimator= ObjectAnimator.ofFloat(rippleView, "Alpha", 0f, 1.0f);
+            }
             alphaAnimator.setRepeatCount(ObjectAnimator.INFINITE);
             alphaAnimator.setRepeatMode(ObjectAnimator.RESTART);
             alphaAnimator.setStartDelay(i * rippleDelay);
@@ -137,6 +159,13 @@ public class RippleBackground extends RelativeLayout{
             animatorSet.start();
             animationRunning=true;
         }
+    }
+    
+    public void setRippleColor(int color){
+    	paint.setColor(color);
+    	 for(RippleView rippleView : rippleViewList){
+             rippleView.invalidate();
+         }
     }
 
     public void stopRippleAnimation(){
