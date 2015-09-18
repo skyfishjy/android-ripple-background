@@ -74,14 +74,7 @@ public class RippleBackground extends RelativeLayout{
 
         rippleDelay=rippleDurationTime/rippleAmount;
 
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        if(rippleType==DEFAULT_FILL_TYPE){
-            rippleStrokeWidth=0;
-            paint.setStyle(Paint.Style.FILL);
-        }else
-            paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(rippleColor);
+        initPaint();
 
         rippleParams=new LayoutParams((int)(2*(rippleRadius+rippleStrokeWidth)),(int)(2*(rippleRadius+rippleStrokeWidth)));
         rippleParams.addRule(CENTER_IN_PARENT, TRUE);
@@ -151,4 +144,29 @@ public class RippleBackground extends RelativeLayout{
     public boolean isRippleAnimationRunning(){
         return animationRunning;
     }
+
+    /**
+     * Change the ripple color programmatically
+     *
+     * @param rippleColor This is the ripple color that must be retrieved from getResources().getColor(R.color.blabla). Not the resource id of the color.
+     */
+    public void setRippleColor(int rippleColor) {
+        this.rippleColor = rippleColor;
+        initPaint();
+        for (RippleView rippleView : rippleViewList) {
+            rippleView.invalidate();
+        }
+    }
+
+    private void initPaint() {
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        if(rippleType==DEFAULT_FILL_TYPE){
+            rippleStrokeWidth=0;
+            paint.setStyle(Paint.Style.FILL);
+        }else
+            paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(rippleColor);
+    }
+
 }

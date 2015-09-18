@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
                     @Override
                     public void run() {
                         foundDevice();
+                        rippleBackground.setRippleColor(getResources().getColor(android.R.color.holo_red_light));
                     }
                 },3000);
             }
