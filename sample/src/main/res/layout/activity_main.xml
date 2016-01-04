@@ -6,6 +6,7 @@
     android:id="@+id/content"
     app:rb_color="#0099CC"
     app:rb_radius="32dp"
+    app:rb_drawable="@drawable/phone1"
     app:rb_rippleAmount="6"
     app:rb_duration="3000"
     app:rb_scale="6">

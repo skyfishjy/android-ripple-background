@@ -11,5 +11,6 @@
             <enum name="fillRipple" value="0"/>
             <enum name="strokeRipple" value="1"/>
         </attr>
+        <attr name="rb_drawable" format="reference"/>
     </declare-styleable>
 </resources>
