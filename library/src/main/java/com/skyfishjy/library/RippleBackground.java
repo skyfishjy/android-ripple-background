@@ -39,7 +39,6 @@ public class RippleBackground extends RelativeLayout {
     private Drawable rippleDrawable;
     private Paint paint;
     private boolean animationRunning = false;
-    private boolean isDrawable = false;
     private AnimatorSet animatorSet;
     private ArrayList<Animator> animatorList;
     private LayoutParams rippleParams;
@@ -75,10 +74,7 @@ public class RippleBackground extends RelativeLayout {
         rippleAmount = typedArray.getInt(R.styleable.RippleBackground_rb_rippleAmount, DEFAULT_RIPPLE_COUNT);
         rippleScale = typedArray.getFloat(R.styleable.RippleBackground_rb_scale, DEFAULT_SCALE);
         rippleType = typedArray.getInt(R.styleable.RippleBackground_rb_type, DEFAULT_FILL_TYPE);
-        if (R.styleable.RippleBackground_rb_drawable != 0) {
-            isDrawable = true;
-            rippleDrawable = typedArray.getDrawable(R.styleable.RippleBackground_rb_drawable);
-        }
+        rippleDrawable = typedArray.getDrawable(R.styleable.RippleBackground_rb_drawable);
         typedArray.recycle();
 
         rippleDelay = rippleDurationTime / rippleAmount;
