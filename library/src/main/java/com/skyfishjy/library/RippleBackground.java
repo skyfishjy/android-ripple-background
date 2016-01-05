@@ -39,6 +39,7 @@ public class RippleBackground extends RelativeLayout {
     private Drawable rippleDrawable;
     private Paint paint;
     private boolean animationRunning = false;
+    private boolean ovalView;
     private AnimatorSet animatorSet;
     private ArrayList<Animator> animatorList;
     private LayoutParams rippleParams;
@@ -131,6 +132,7 @@ public class RippleBackground extends RelativeLayout {
 
         @Override
         protected void onDraw(Canvas canvas) {
+            int radius = (Math.min(getWidth(), getHeight())) / 2;
             if (rippleDrawable != null) {
                 if (Build.VERSION.SDK_INT < 12)
                     this.setBackgroundDrawable(rippleDrawable);
@@ -138,8 +140,10 @@ public class RippleBackground extends RelativeLayout {
                     this.setBackground(rippleDrawable);
                 return;
             }
-            int radius = (Math.min(getWidth(), getHeight())) / 2;
-            canvas.drawCircle(radius, radius, radius - rippleStrokeWidth, paint);
+            if (ovalView && Build.VERSION.SDK_INT > 21)
+                canvas.drawOval(radius, radius, radius + 100, radius + 50, paint);
+            else
+                canvas.drawCircle(radius, radius, radius - rippleStrokeWidth, paint);
         }
 
 
@@ -164,5 +168,13 @@ public class RippleBackground extends RelativeLayout {
 
     public boolean isRippleAnimationRunning() {
         return animationRunning;
+    }
+
+    public boolean isOvalView() {
+        return ovalView;
+    }
+
+    public void setOvalView(boolean ovalView) {
+        this.ovalView = ovalView;
     }
 }
