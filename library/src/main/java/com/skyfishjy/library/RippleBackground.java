@@ -148,4 +148,76 @@ public class RippleBackground extends RelativeLayout {
         public boolean isRippleAnimationRunning() {
             return animationRunning;
         }
+
+    public float getRippleRadius() {
+        return rippleRadius;
+    }
+
+    public void setRippleRadius(float rippleRadius) {
+        this.rippleRadius = rippleRadius;
+    }
+
+    public int getRippleAmount() {
+        return rippleAmount;
+    }
+
+    public void setRippleAmount(int rippleAmount) {
+        this.rippleAmount = rippleAmount;
+    }
+
+    public int getRippleDurationTime() {
+        return rippleDurationTime;
+    }
+
+    public void setRippleDurationTime(int rippleDurationTime) {
+        this.rippleDurationTime = rippleDurationTime;
+    }
+
+    public int getRippleDelay() {
+        return rippleDelay;
+    }
+
+    public void setRippleDelay(int rippleDelay) {
+        this.rippleDelay = rippleDelay;
+    }
+
+    public float getRippleScale() {
+        return rippleScale;
+    }
+
+    public void setRippleScale(float rippleScale) {
+        this.rippleScale = rippleScale;
+    }
+
+    public int getRippleType() {
+        return rippleType;
+    }
+
+    public void setRippleType(int rippleType) {
+        this.rippleType = rippleType;
+    }
+
+    public Drawable getRippleDrawable() {
+        return rippleDrawable;
+    }
+
+    public void setRippleDrawable(Drawable rippleDrawable) {
+        this.rippleDrawable = rippleDrawable;
+    }
+
+    public boolean isAnimationRunning() {
+        return animationRunning;
+    }
+
+    public void setAnimationRunning(boolean animationRunning) {
+        this.animationRunning = animationRunning;
+    }
+
+    public int getRippleColor() {
+        return rippleColor;
+    }
+
+    public void setRippleColor(int rippleColor) {
+        this.rippleColor = rippleColor;
+    }
 }
