@@ -34,6 +34,7 @@ public class RippleBackground extends RelativeLayout {
     private float rippleRadius;
     private int rippleDurationTime;
     private int rippleAmount;
+    int maxSizeImageView= 50;
     private int rippleDelay;
     private float rippleScale;
     private int rippleType;
@@ -101,8 +102,8 @@ public class RippleBackground extends RelativeLayout {
             ImageView imageView = new ImageView(getContext());
             imageView.setLayoutParams(rippleParams);
             imageView.setImageDrawable(rippleDrawable);
-            imageView.setMaxWidth(100);
-            imageView.setMaxHeight(100);
+            imageView.setMaxWidth(maxSizeImageView);
+            imageView.setMaxHeight(maxSizeImageView);
             addView(imageView);
             rippleViewList.add(imageView);
             final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(imageView, "ScaleX", 1.0f, rippleScale);
@@ -228,5 +229,13 @@ public class RippleBackground extends RelativeLayout {
     public void setRippleColor(int rippleColor) {
         this.rippleColor = rippleColor;
         invalidate();
+    }
+
+    public int getMaxSizeImageView() {
+        return maxSizeImageView;
+    }
+
+    public void setMaxSizeImageView(int maxSizeImageView) {
+        this.maxSizeImageView = maxSizeImageView;
     }
 }
