@@ -237,5 +237,6 @@ public class RippleBackground extends RelativeLayout {
 
     public void setMaxSizeImageView(int maxSizeImageView) {
         this.maxSizeImageView = maxSizeImageView;
+        invalidate();
     }
 }
