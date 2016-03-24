@@ -155,6 +155,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleRadius(float rippleRadius) {
         this.rippleRadius = rippleRadius;
+        invalidate();
     }
 
     public int getRippleAmount() {
@@ -163,6 +164,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleAmount(int rippleAmount) {
         this.rippleAmount = rippleAmount;
+        invalidate();
     }
 
     public int getRippleDurationTime() {
@@ -171,6 +173,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleDurationTime(int rippleDurationTime) {
         this.rippleDurationTime = rippleDurationTime;
+        invalidate();
     }
 
     public int getRippleDelay() {
@@ -179,6 +182,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleDelay(int rippleDelay) {
         this.rippleDelay = rippleDelay;
+        invalidate();
     }
 
     public float getRippleScale() {
@@ -187,6 +191,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleScale(float rippleScale) {
         this.rippleScale = rippleScale;
+        invalidate();
     }
 
     public int getRippleType() {
@@ -195,6 +200,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleType(int rippleType) {
         this.rippleType = rippleType;
+        invalidate();
     }
 
     public Drawable getRippleDrawable() {
@@ -203,6 +209,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleDrawable(Drawable rippleDrawable) {
         this.rippleDrawable = rippleDrawable;
+        invalidate();
     }
 
     public boolean isAnimationRunning() {
@@ -211,6 +218,7 @@ public class RippleBackground extends RelativeLayout {
 
     public void setAnimationRunning(boolean animationRunning) {
         this.animationRunning = animationRunning;
+        invalidate();
     }
 
     public int getRippleColor() {
@@ -219,5 +227,6 @@ public class RippleBackground extends RelativeLayout {
 
     public void setRippleColor(int rippleColor) {
         this.rippleColor = rippleColor;
+        invalidate();
     }
 }
