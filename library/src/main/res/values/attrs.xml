@@ -6,10 +6,11 @@
         <attr name="rb_radius" format="dimension"/>
         <attr name="rb_duration" format="integer"/>
         <attr name="rb_rippleAmount" format="integer"/>
-        <attr name="rb_scale" format="float"/>
+        <attr name="rb_scale" format="dimension"/>
         <attr name="rb_type" format="enum">
             <enum name="fillRipple" value="0"/>
             <enum name="strokeRipple" value="1"/>
         </attr>
+        <attr name="rb_drawable" format="reference"/>
     </declare-styleable>
 </resources>
