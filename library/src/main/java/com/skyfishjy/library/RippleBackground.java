@@ -42,8 +42,9 @@ public class RippleBackground extends RelativeLayout {
     private Paint paint;
     private boolean animationRunning = false;
     private boolean ovalView;
-    private AnimatorSet animatorSet;
-    private ArrayList<Animator> animatorList;
+    int max = 2000, min = 0;
+    private AnimatorSet animatorSet, animatorSetScale;
+    private ArrayList<Animator> animatorList, animatorListScale;
     private LayoutParams rippleParams;
     private ArrayList<ImageView> rippleViewList = new ArrayList<>();
 
@@ -96,10 +97,13 @@ public class RippleBackground extends RelativeLayout {
 
         animatorSet = new AnimatorSet();
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
+        animatorSetScale = new AnimatorSet();
+        animatorSetScale.setInterpolator(new AccelerateDecelerateInterpolator());
         animatorList = new ArrayList<>();
+        animatorListScale = new ArrayList<>();
 
         for (int i = 0; i < rippleAmount; i++) {
-            ImageView imageView = new ImageView(getContext());
+           final ImageView imageView = new ImageView(getContext());
             imageView.setLayoutParams(rippleParams);
             imageView.setImageDrawable(rippleDrawable);
             imageView.setMaxWidth(maxSizeImageView);
@@ -107,26 +111,32 @@ public class RippleBackground extends RelativeLayout {
             addView(imageView);
             rippleViewList.add(imageView);
             final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(imageView, "ScaleX", 1.0f, rippleScale);
-            scaleXAnimator.setRepeatCount(ObjectAnimator.INFINITE);
-            scaleXAnimator.setRepeatMode(ObjectAnimator.RESTART);
+//            scaleXAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+//            scaleXAnimator.setRepeatMode(ObjectAnimator.RESTART);
             scaleXAnimator.setStartDelay(i * rippleDelay);
             scaleXAnimator.setDuration(rippleDurationTime);
-            animatorList.add(scaleXAnimator);
+            animatorListScale.add(scaleXAnimator);
             final ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(imageView, "ScaleY", 1.0f, rippleScale);
-            scaleYAnimator.setRepeatCount(ObjectAnimator.INFINITE);
-            scaleYAnimator.setRepeatMode(ObjectAnimator.RESTART);
+//            scaleYAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+//            scaleYAnimator.setRepeatMode(ObjectAnimator.RESTART);
             scaleYAnimator.setStartDelay(i * rippleDelay);
             scaleYAnimator.setDuration(rippleDurationTime);
-            animatorList.add(scaleYAnimator);
+            animatorListScale.add(scaleYAnimator);
+            final ObjectAnimator alphaAnimatorStart = ObjectAnimator.ofFloat(imageView, "Alpha", 0f, 1.0f);
+//            alphaAnimatorStart.setRepeatCount(ObjectAnimator.INFINITE);
+//            alphaAnimatorStart.setRepeatMode(ObjectAnimator.RESTART);
+            alphaAnimatorStart.setStartDelay(i * rippleDelay);
+            alphaAnimatorStart.setDuration(rippleDurationTime);
+            animatorList.add(alphaAnimatorStart);
             final ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(imageView, "Alpha", 1.0f, 0f);
-            alphaAnimator.setRepeatCount(ObjectAnimator.INFINITE);
-            alphaAnimator.setRepeatMode(ObjectAnimator.RESTART);
-            alphaAnimator.setStartDelay(i * rippleDelay);
+//            alphaAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+//            alphaAnimator.setRepeatMode(ObjectAnimator.RESTART);
+            alphaAnimatorStart.setStartDelay(i * rippleDelay);
             alphaAnimator.setDuration(rippleDurationTime);
             animatorList.add(alphaAnimator);
         }
-
         animatorSet.playTogether(animatorList);
+        animatorSetScale.playTogether(animatorListScale);
     }
 
         public void startRippleAnimation() {
@@ -135,6 +145,7 @@ public class RippleBackground extends RelativeLayout {
                     rippleView.setVisibility(VISIBLE);
                 }
                 animatorSet.start();
+                animatorSetScale.start();
                 animationRunning = true;
             }
         }

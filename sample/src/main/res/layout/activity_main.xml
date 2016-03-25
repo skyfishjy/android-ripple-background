@@ -5,25 +5,15 @@
     android:layout_height="match_parent"
     android:id="@+id/content"
     app:rb_color="#0099CC"
-    app:rb_radius="32dp"
+    app:rb_radius="10dp"
     app:rb_drawable="@drawable/oval"
-    app:rb_rippleAmount="6"
+    app:rb_rippleAmount="5"
     app:rb_duration="3000"
-    app:rb_scale="6">
+    app:rb_scale="50">
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_centerInParent="true"
-        android:id="@+id/centerImage"
-        android:src="@drawable/phone1"/>
-    <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:id="@+id/foundDevice"
-        android:layout_above="@id/centerImage"
-        android:layout_marginBottom="32dp"
-        android:layout_toLeftOf="@id/centerImage"
-        android:layout_marginRight="6dp"
-        android:src="@drawable/phone2"
-        android:visibility="invisible"/>
+        android:id="@+id/centerImage"/>
+
 </com.skyfishjy.library.RippleBackground>
