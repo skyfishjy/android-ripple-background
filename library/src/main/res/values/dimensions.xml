@@ -2,4 +2,5 @@
 <resources>
     <dimen name="rippleStrokeWidth">2dp</dimen>
     <dimen name="rippleRadius">64dp</dimen>
+    <dimen name="rippleScale">30dp</dimen>
 </resources>
