@@ -136,6 +136,12 @@ public class RippleBackground extends RelativeLayout{
             for(RippleView rippleView:rippleViewList){
                 rippleView.setVisibility(VISIBLE);
             }
+            if (animatorList != null){
+                for (Animator anim : animatorList){
+                    if(anim instanceof ObjectAnimator)
+                    ((ObjectAnimator) anim).setRepeatCount(ObjectAnimator.INFINITE);
+                }
+            }
             animatorSet.start();
             animationRunning=true;
         }
@@ -143,7 +149,12 @@ public class RippleBackground extends RelativeLayout{
 
     public void stopRippleAnimation(){
         if(isRippleAnimationRunning()){
-            animatorSet.end();
+            if (animatorList != null){
+                for (Animator anim : animatorList){
+                    if(anim instanceof ObjectAnimator)
+                    ((ObjectAnimator) anim).setRepeatCount(0);
+                }
+            }
             animationRunning=false;
         }
     }
