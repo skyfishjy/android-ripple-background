@@ -127,7 +127,7 @@ public class RippleBackground extends RelativeLayout{
         @Override
         protected void onDraw(Canvas canvas) {
             int radius=(Math.min(getWidth(),getHeight()))/2;
-            canvas.drawCircle(radius,radius,radius-rippleStrokeWidth,paint);
+            canvas.drawCircle(getWidth() / 2, getHeight() / 2, radius-rippleStrokeWidth,paint);
         }
     }
 
