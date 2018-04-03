@@ -4,19 +4,19 @@ A beautiful ripple animation for your app. You can easily change its color, spee
 
 ![Simple Ripple](previews/rippleSimple.gif)　　　　　　![Multiple ripples](previews/rippleFoundDevice.gif)
 
-##Usage
+## Usage
 
-###Step 1
+### Step 1
 
-####Install with Gradle
+#### Install with Gradle
 
 ```groovy
 dependencies {
         compile 'com.skyfishjy.ripplebackground:library:1.0.1'
 }
 ```
-###Step 2
-####RippleBackground
+### Step 2
+#### RippleBackground
 
 Add `RippleBackground` to your layout with content you want, like an ImageView. Configure the view customization elements using styleable attributes.
  
@@ -58,7 +58,7 @@ Stop animation:
     rippleBackground.stopRippleAnimation();
 ```
 
-##Theming
+## Theming
 * app:rb_color [color def:@android:color/holo_blue_dark] --> Color of the ripple
 * app:rb_radius [dimension def:64dp ] --> Radius of the ripple
 * app:rb_duration [integer def:3000 ] --> Duration of one ripple animation (millisecond) 
