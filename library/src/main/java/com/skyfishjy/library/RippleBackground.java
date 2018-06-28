@@ -145,6 +145,9 @@ public class RippleBackground extends RelativeLayout{
         if(isRippleAnimationRunning()){
             animatorSet.end();
             animationRunning=false;
+            for (RippleView rippleView:rippleViewList) {
+                rippleView.setVisibility(INVISIBLE);
+            }
         }
     }
 
