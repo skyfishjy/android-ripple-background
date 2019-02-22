@@ -27,19 +27,14 @@ public class MainActivity extends Activity {
         final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
 
         final Handler handler=new Handler();
+        rippleBackground.startRippleAnimation();
+
 
         foundDevice=(ImageView)findViewById(R.id.foundDevice);
         ImageView button=(ImageView)findViewById(R.id.centerImage);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rippleBackground.startRippleAnimation();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        foundDevice();
-                    }
-                },3000);
             }
         });
     }
