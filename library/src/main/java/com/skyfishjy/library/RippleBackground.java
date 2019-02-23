@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
@@ -26,10 +27,6 @@ public class RippleBackground extends RelativeLayout {
     private static final int   DEFAULT_FILL_TYPE     = 0;
 
 
-    public void setRippleType(int rippleType) {
-        this.rippleType = rippleType;
-    }
-
     private int                   rippleColor;
     private float                 rippleStrokeWidth;
     private float                 rippleRadius;
@@ -39,10 +36,8 @@ public class RippleBackground extends RelativeLayout {
     private float                 rippleScale;
     private int                   rippleType;
     private Paint                 paint;
-    private boolean               animationRunning = false;
     private AnimatorSet           animatorSet;
-    private ArrayList<Animator>   animatorList;
-    private LayoutParams          rippleParams;
+    private boolean               animationRunning = false;
     private ArrayList<RippleView> rippleViewList   = new ArrayList<RippleView>();
 
     public RippleBackground(Context context) {
@@ -76,10 +71,11 @@ public class RippleBackground extends RelativeLayout {
         rippleScale = typedArray.getFloat(R.styleable.RippleBackground_rb_scale, DEFAULT_SCALE);
         rippleType = typedArray.getInt(R.styleable.RippleBackground_rb_type, DEFAULT_FILL_TYPE);
         typedArray.recycle();
-
-         makeRipple();
     }
 
+    public void setRippleType(int rippleType) {
+        this.rippleType = rippleType;
+    }
 
     public void setRippleColor(int rippleColor) {
         this.rippleColor = rippleColor;
@@ -109,7 +105,6 @@ public class RippleBackground extends RelativeLayout {
         this.rippleScale = rippleScale;
     }
 
-
     private void makeRipple() {
         rippleDelay = rippleDurationTime / rippleAmount;
 
@@ -122,16 +117,19 @@ public class RippleBackground extends RelativeLayout {
             paint.setStyle(Paint.Style.STROKE);
         paint.setColor(rippleColor);
 
-        rippleParams = new LayoutParams((int) (2 * (rippleRadius + rippleStrokeWidth)), (int) (2 * (rippleRadius + rippleStrokeWidth)));
+        LayoutParams rippleParams = new LayoutParams((int) (2 * (rippleRadius + rippleStrokeWidth)), (int) (2 * (rippleRadius + rippleStrokeWidth)));
         rippleParams.addRule(CENTER_IN_PARENT, TRUE);
 
         animatorSet = new AnimatorSet();
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-        animatorList = new ArrayList<Animator>();
+        ArrayList<Animator> animatorList = new ArrayList<>();
+
+        clearAttachedViews();
+
 
         for (int i = 0; i < rippleAmount; i++) {
             RippleView rippleView = new RippleView(getContext());
-            addView(rippleView, rippleParams);
+            addView(rippleView, 0, rippleParams);
             rippleViewList.add(rippleView);
             final ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(rippleView, "ScaleX", 1.0f, rippleScale);
             scaleXAnimator.setRepeatCount(ObjectAnimator.INFINITE);
@@ -153,9 +151,53 @@ public class RippleBackground extends RelativeLayout {
             animatorList.add(alphaAnimator);
         }
 
+
         animatorSet.playTogether(animatorList);
+
     }
 
+
+    private void clearAttachedViews() {
+        int count = getChildCount();
+        while (count > 0) {
+            int index = (count - 1);
+            if (getChildAt(index) instanceof RippleView) {
+                removeViewAt(index);
+            }
+            count--;
+        }
+        invalidate();
+    }
+
+
+    public void startRippleAnimation() {
+
+        if (isRippleAnimationRunning()) {
+            stopRippleAnimation();
+        }
+
+        makeRipple();
+        for (RippleView rippleView : rippleViewList) {
+            rippleView.setVisibility(VISIBLE);
+        }
+
+        animatorSet.start();
+        animationRunning = true;
+    }
+
+    public void stopRippleAnimation() {
+        if (isRippleAnimationRunning()) {
+
+            animatorSet.end();
+            clearAttachedViews();
+            animationRunning = false;
+        }
+    }
+
+
+    public boolean isRippleAnimationRunning() {
+        return animationRunning;
+    }
 
     private class RippleView extends View {
 
@@ -169,28 +211,7 @@ public class RippleBackground extends RelativeLayout {
             int radius = (Math.min(getWidth(), getHeight())) / 2;
             canvas.drawCircle(radius, radius, radius - rippleStrokeWidth, paint);
         }
-    }
-
-    public void startRippleAnimation() {
-        if (!isRippleAnimationRunning()) {
-            for (RippleView rippleView : rippleViewList) {
-                rippleView.setVisibility(VISIBLE);
-            }
-            //makeRipple();
-            animatorSet.start();
-            animationRunning = true;
-        }
-    }
-
-    public void stopRippleAnimation() {
-        if (isRippleAnimationRunning()) {
-            animatorSet.end();
-            animationRunning = false;
-        }
-    }
 
 
-    public boolean isRippleAnimationRunning() {
-        return animationRunning;
     }
 }

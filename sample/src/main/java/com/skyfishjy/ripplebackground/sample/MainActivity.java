@@ -1,6 +1,7 @@
 package com.skyfishjy.ripplebackground.sample;
 
 import java.util.ArrayList;
+
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -24,27 +25,47 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
+        final RippleBackground rippleBackground = (RippleBackground) findViewById(R.id.content);
 
-        final Handler handler=new Handler();
+        final Handler handler = new Handler();
         rippleBackground.startRippleAnimation();
 
 
-        foundDevice=(ImageView)findViewById(R.id.foundDevice);
-        ImageView button=(ImageView)findViewById(R.id.centerImage);
+        foundDevice = (ImageView) findViewById(R.id.foundDevice);
+        foundDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+//                if (rippleBackground.isRippleAnimationRunning()) {
+//                    rippleBackground.stopRippleAnimation();
+//                }
+//
+//                rippleBackground.setRippleAmount(10);
+//                rippleBackground.setRippleColor(getColor(android.R.color.holo_green_light));
+//                rippleBackground.startRippleAnimation();
+
+               // rippleBackground.stopRippleAnimation();
+                rippleBackground.setRippleColor(getColor(android.R.color.holo_green_light));
+                rippleBackground.setRippleAmount(1);
+                rippleBackground.startRippleAnimation();
+            }
+        });
+        ImageView button = (ImageView) findViewById(R.id.centerImage);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
     }
 
-    private void foundDevice(){
+    private void foundDevice() {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(400);
         animatorSet.setInterpolator(new AccelerateDecelerateInterpolator());
-        ArrayList<Animator> animatorList=new ArrayList<Animator>();
-        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(foundDevice, "ScaleX", 0f, 1.2f, 1f);
+        ArrayList<Animator> animatorList   = new ArrayList<Animator>();
+        ObjectAnimator      scaleXAnimator = ObjectAnimator.ofFloat(foundDevice, "ScaleX", 0f, 1.2f, 1f);
         animatorList.add(scaleXAnimator);
         ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(foundDevice, "ScaleY", 0f, 1.2f, 1f);
         animatorList.add(scaleYAnimator);
