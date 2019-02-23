@@ -2,7 +2,7 @@
 
 A beautiful ripple animation for your app. You can easily change its color, speed of wave, one ripple or multiple ripples. See demo below.
 
-the library powered by [this library](https://github.com/skyfishjy/android-ripple-background) that it can change behavior it runtime.
+This library powered by [here](https://github.com/skyfishjy/android-ripple-background) that can change behavior it runtime.
 
 
 ![Simple Ripple](previews/rippleSimple.gif)　　　　　![Multiple ripples](previews/rippleFoundDevice.gif)
