@@ -12,7 +12,7 @@ the library powered by [this library](https://github.com/skyfishjy/android-rippl
 ### Step 1
 
 #### Install with .aar file
-add `flatDir` in `build.gradle`:
+first step You should copy `ripple.aar` to `libs` project directory and add `flatDir` in `build.gradle`:
 
 ```groovy
 allprojects {
@@ -27,6 +27,10 @@ allprojects {
 
 ```
 next step add `ripple.aar` to `build.gradle` module app:
+```groovy
+   implementation (name:'ripple' , ext:'aar')
+```
+
 
 ### Step 2
 #### RippleBackground
@@ -84,7 +88,7 @@ Stop animation:
 * setRippleDelay(int rippleDelay)
 * setRippleScale(float rippleScale)
 
-* You can after change values by Programbillity methods, invoke `startRippleAnimation` method for change behavioir ripple animation
+# You can after change values by Programbillity methods, invoke `startRippleAnimation` method for change behavioir ripple animation
 
 
 ## Theming
