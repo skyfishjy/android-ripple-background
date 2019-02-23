@@ -88,7 +88,7 @@ Stop animation:
 * setRippleDelay(int rippleDelay)
 * setRippleScale(float rippleScale)
 
-# You can after change values by Programbillity methods, invoke `startRippleAnimation` method for change behavioir ripple animation
+ ```You can after change values by Programbillity methods, invoke `startRippleAnimation` method for change behavioir ripple animation```
 
 
 ## Theming
