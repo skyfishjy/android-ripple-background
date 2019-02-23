@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 //                rippleBackground.startRippleAnimation();
 
                // rippleBackground.stopRippleAnimation();
-                rippleBackground.setRippleColor(getColor(android.R.color.holo_green_light));
+               // rippleBackground.setRippleColor(getColor(android.R.color.holo_green_light));
                 rippleBackground.setRippleAmount(1);
                 rippleBackground.startRippleAnimation();
             }
