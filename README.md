@@ -2,21 +2,38 @@
 
 A beautiful ripple animation for your app. You can easily change its color, speed of wave, one ripple or multiple ripples. See demo below.
 
-![Simple Ripple](previews/rippleSimple.gif)　　　　　　![Multiple ripples](previews/rippleFoundDevice.gif)
+This library powered by [here](https://github.com/skyfishjy/android-ripple-background) that can change behavior it by programbillity.
 
-##Usage
 
-###Step 1
+![Simple Ripple](previews/rippleSimple.gif)　　　　　![Multiple ripples](previews/rippleFoundDevice.gif)
 
-####Install with Gradle
+## Usage
+
+### Step 1
+
+#### Install with `.aar` file
+first step You should download [ripple.aar](https://github.com/ImanX/android-ripple-background/blob/master/ripple.aar?raw=true) and copy it to `libs` project directory, now add `flatDir` command in `build.gradle`:
 
 ```groovy
-dependencies {
-        compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+allprojects {
+    repositories {
+        //
+        flatDir {
+            dirs 'libs'
+        }
+        //
+    }
 }
+
 ```
-###Step 2
-####RippleBackground
+next step add `ripple.aar` to `build.gradle` module app:
+```groovy
+   implementation (name:'ripple' , ext:'aar')
+```
+
+
+### Step 2
+#### RippleBackground
 
 Add `RippleBackground` to your layout with content you want, like an ImageView. Configure the view customization elements using styleable attributes.
  
@@ -48,8 +65,11 @@ Start animation:
     imageView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            rippleBackground.startRippleAnimation();
-        }
+                rippleBackground.setRippleDurationTime(100);
+                rippleBackground.setRippleColor(getColor(android.R.color.holo_green_light));
+                rippleBackground.setRippleAmount(1);
+                rippleBackground.setRippleRadius(2);
+                rippleBackground.startRippleAnimation();        }
     });
 ```
 Stop animation:
@@ -58,7 +78,20 @@ Stop animation:
     rippleBackground.stopRippleAnimation();
 ```
 
-##Theming
+## Programbillity
+* setRippleType(int rippleType) 
+* setRippleColor(int rippleColor)
+* setRippleStrokeWidth(float rippleStrokeWidth)
+* setRippleRadius(float rippleRadius)
+* setRippleDurationTime(int rippleDurationTime)
+* setRippleAmount(int rippleAmount)
+* setRippleDelay(int rippleDelay)
+* setRippleScale(float rippleScale)
+
+ ```NOTE: You can after change values by Programbillity methods, invoke `startRippleAnimation` method for change behavioir ripple animation```
+
+
+## Theming
 * app:rb_color [color def:@android:color/holo_blue_dark] --> Color of the ripple
 * app:rb_radius [dimension def:64dp ] --> Radius of the ripple
 * app:rb_duration [integer def:3000 ] --> Duration of one ripple animation (millisecond) 
@@ -67,4 +100,3 @@ Stop animation:
 * app:rb_type [enum (fillRipple, strokeRipple) def:fillRipple] --> Filled circle or ring
 * app:rb_strokeWidth [dimension def:2dp] --> Stroke width of the ripple, ONLY work when rb_type="strokeRipple"
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--ripple--background-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1107)
