@@ -12,7 +12,7 @@ This library powered by [here](https://github.com/skyfishjy/android-ripple-backg
 ### Step 1
 
 #### Install with `.aar` file
-first step You should download [`ripple.aar`]("https://github.com/ImanX/android-ripple-background/blob/master/ripple.aar?raw=true") and copy it to `libs` project directory, now add `flatDir` command in `build.gradle`:
+first step You should download [ripple.aar]("https://github.com/ImanX/android-ripple-background/blob/master/ripple.aar?raw=true") and copy it to `libs` project directory, now add `flatDir` command in `build.gradle`:
 
 ```groovy
 allprojects {
