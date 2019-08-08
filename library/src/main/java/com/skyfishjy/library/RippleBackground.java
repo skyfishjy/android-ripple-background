@@ -79,8 +79,10 @@ public class RippleBackground extends RelativeLayout{
         if(rippleType==DEFAULT_FILL_TYPE){
             rippleStrokeWidth=0;
             paint.setStyle(Paint.Style.FILL);
-        }else
+        }else{
             paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(rippleStrokeWidth);
+        }
         paint.setColor(rippleColor);
 
         rippleParams=new LayoutParams((int)(2*(rippleRadius+rippleStrokeWidth)),(int)(2*(rippleRadius+rippleStrokeWidth)));
